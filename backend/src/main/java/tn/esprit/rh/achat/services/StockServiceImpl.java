@@ -61,6 +61,13 @@ public class StockServiceImpl implements IStockService {
 
 	@Override
 	public Stock retrieveStock(Long stockId) {
+<<<<<<< HEAD
+<<<<<<< HEAD
+		long start = System.currentTimeMillis();
+=======
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
+=======
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
 		log.info("Récupération du stock avec ID : {}", stockId);
 		Stock stock = stockRepository.findById(stockId).orElse(null);
 		if (stock != null) {
@@ -68,6 +75,14 @@ public class StockServiceImpl implements IStockService {
 		} else {
 			log.warn("Stock non trouvé avec ID : {}", stockId);
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
+		long elapsedTime = System.currentTimeMillis() - start;
+		log.info("Temps d'exécution de la méthode retrieveStock : {} ms", elapsedTime);
+=======
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
+=======
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
 		return stock;
 	}
 
@@ -88,7 +103,14 @@ public class StockServiceImpl implements IStockService {
 					+ newLine;
 			log.warn("Stock en rouge détecté : {}", stocksEnRouge.get(i));
 		}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
+=======
+
+>>>>>>> fe5a928 (Ajout des logs dans le service Stock)
 		log.info("Fin de la vérification des stocks en rouge.");
 		return finalMessage;
 	}
