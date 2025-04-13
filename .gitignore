@@ -1,9 +1,2 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 logs/
-=======
 docker-compose.yml
->>>>>>> fe5a928 (Ajout des logs dans le service Stock)
-=======
-docker-compose.yml
->>>>>>> fe5a928 (Ajout des logs dans le service Stock)
