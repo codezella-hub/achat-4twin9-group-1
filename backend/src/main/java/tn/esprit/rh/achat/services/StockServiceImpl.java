@@ -61,6 +61,8 @@ public class StockServiceImpl implements IStockService {
 
 	@Override
 	public Stock retrieveStock(Long stockId) {
+		long start = System.currentTimeMillis();  // mesure du temps
+
 		log.info("Récupération du stock avec ID : {}", stockId);
 		Stock stock = stockRepository.findById(stockId).orElse(null);
 		if (stock != null) {
@@ -68,8 +70,13 @@ public class StockServiceImpl implements IStockService {
 		} else {
 			log.warn("Stock non trouvé avec ID : {}", stockId);
 		}
+
+		long elapsedTime = System.currentTimeMillis() - start;
+		log.info("Temps d'exécution de la méthode retrieveStock : {} ms", elapsedTime);
+
 		return stock;
 	}
+
 
 	@Override
 	public String retrieveStatusStock() {
@@ -93,3 +100,4 @@ public class StockServiceImpl implements IStockService {
 		return finalMessage;
 	}
 }
+
