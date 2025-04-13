@@ -15,53 +15,59 @@ import java.util.List;
 public class StockServiceImpl implements IStockService {
 
 	@Autowired
-	StockRepository stockRepository;
-
+	private StockRepository stockRepository;
 
 	@Override
 	public List<Stock> retrieveAllStocks() {
-		// récuperer la date à l'instant t1
-		log.info("In method retrieveAllStocks");
+		log.debug("🔍 Débogage : Exécution de la méthode retrieveAllStocks()");
+		log.trace("📍 Entrée dans la méthode retrieveAllStocks()");
+		log.info("Récupération de tous les stocks.");
 		List<Stock> stocks = (List<Stock>) stockRepository.findAll();
 		for (Stock stock : stocks) {
-			log.info(" Stock : " + stock);
+			log.info("Stock récupéré : {}", stock);
 		}
-		log.info("out of method retrieveAllStocks");
-		// récuperer la date à l'instant t2
-		// temps execution = t2 - t1
+		log.info("Tous les stocks ont été récupérés.");
+		log.trace("📍 Sortie de la méthode retrieveAllStocks()");
 		return stocks;
 	}
 
 	@Override
 	public Stock addStock(Stock s) {
-		// récuperer la date à l'instant t1
-		log.info("In method addStock");
-		return stockRepository.save(s);
-		
+		log.info("Ajout du stock : {}", s);
+		log.info("Ajout du stock avec libellé : {}", s.getLibelleStock());
+		Stock savedStock = stockRepository.save(s);
+		log.info("Stock ajouté avec succès : {}", savedStock);
+		return savedStock;
 	}
 
 	@Override
 	public void deleteStock(Long stockId) {
-		log.info("In method deleteStock");
-		stockRepository.deleteById(stockId);
-
+		log.info("Suppression du stock avec ID : {}", stockId);
+		try {
+			stockRepository.deleteById(stockId);
+			log.info("Stock supprimé avec succès.");
+		} catch (Exception e) {
+			log.error("Erreur lors de la suppression du stock avec ID : {}", stockId, e);
+		}
 	}
 
 	@Override
 	public Stock updateStock(Stock s) {
-		log.info("In method updateStock");
-		return stockRepository.save(s);
+		log.info("Mise à jour du stock : {}", s);
+		Stock updatedStock = stockRepository.save(s);
+		log.info("Stock mis à jour avec succès : {}", updatedStock);
+		return updatedStock;
 	}
 
 	@Override
 	public Stock retrieveStock(Long stockId) {
-		long start = System.currentTimeMillis();
-		log.info("In method retrieveStock");
+		log.info("Récupération du stock avec ID : {}", stockId);
 		Stock stock = stockRepository.findById(stockId).orElse(null);
-		log.info("out of method retrieveStock");
-		 long elapsedTime = System.currentTimeMillis() - start;
-		log.info("Method execution time: " + elapsedTime + " milliseconds.");
-
+		if (stock != null) {
+			log.info("Stock récupéré : {}", stock);
+		} else {
+			log.warn("Stock non trouvé avec ID : {}", stockId);
+		}
 		return stock;
 	}
 
@@ -73,15 +79,17 @@ public class StockServiceImpl implements IStockService {
 		String finalMessage = "";
 		String newLine = System.getProperty("line.separator");
 		List<Stock> stocksEnRouge = (List<Stock>) stockRepository.retrieveStatusStock();
-		for (int i = 0; i < stocksEnRouge.size(); i++) {
-			finalMessage = newLine + finalMessage + msgDate + newLine + ": le stock "
-					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
-					+ " inférieur à la quantité minimale a ne pas dépasser de " + stocksEnRouge.get(i).getQteMin()
-					+ newLine;
 
+		log.info("Vérification du statut des stocks en rouge.");
+		for (int i = 0; i < stocksEnRouge.size(); i++) {
+			finalMessage = newLine + finalMessage + msgDate + newLine + ": Le stock "
+					+ stocksEnRouge.get(i).getLibelleStock() + " a une quantité de " + stocksEnRouge.get(i).getQte()
+					+ " inférieure à la quantité minimale à ne pas dépasser de " + stocksEnRouge.get(i).getQteMin()
+					+ newLine;
+			log.warn("Stock en rouge détecté : {}", stocksEnRouge.get(i));
 		}
-		log.info(finalMessage);
+
+		log.info("Fin de la vérification des stocks en rouge.");
 		return finalMessage;
 	}
-
 }
