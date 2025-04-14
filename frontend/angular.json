@@ -14,13 +14,6 @@
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
-        "test": {
-          "options": {
-            "scripts": [],
-            "styles": [],
-            "nodeOptions": "--openssl-legacy-provider"
-          }
-        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {

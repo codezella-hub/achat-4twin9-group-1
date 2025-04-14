@@ -22,7 +22,8 @@ FROM nginx:alpine
 
 # Copier les fichiers générés dans l'étape de build vers le répertoire de Nginx
 COPY --from=build /app/dist/achat-frontend /usr/share/nginx/html
-# Copy the custom nginx config
+
+# Copy the custom nginx config (supprimé le conflit de fusion)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Exposer le port 80 pour accéder à l'application
@@ -30,4 +31,6 @@ EXPOSE 80
 
 # Commande pour démarrer Nginx
 CMD ["nginx", "-g", "daemon off;"]
+
+# Définir la variable d'environnement pour résoudre des problèmes de compatibilité de Node.js
 ENV NODE_OPTIONS=--openssl-legacy-provider
