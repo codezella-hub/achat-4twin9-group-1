@@ -7,7 +7,7 @@
     "build": "export NODE_OPTIONS=--openssl-legacy-provider && ng build",
     "watch": "export NODE_OPTIONS=--openssl-legacy-provider && ng build --watch --configuration development",
     "test": "export NODE_OPTIONS=--openssl-legacy-provider && ng test",
-    "sonar": "npx sonarqube-scanner -Dsonar.projectKey=achat-frontend-sofienneMrabet-4twin9-groupe-1 -Dsonar.login=sqa_ea2afc72f29c37abb924dd15d1e948d910e5c048 -Dsonar.sources=src"
+    "sonar": "npx sonarqube-scanner -Dsonar.projectKey=achat-frontend-sofienneMrabet-4twin9-groupe-1 -Dsonar.token=sqa_23473103b98edd6ad293187ac4fe4bc8e8a32355 -Dsonar.sources=src"
   },
   "private": true,
   "dependencies": {
@@ -24,6 +24,7 @@
     "@popperjs/core": "^2.10.2",
     "bootstrap": "^5.2.0",
     "ngx-logger": "^5.0.12",
+    "prom-client": "^15.1.3",
     "rxjs": "~6.6.0",
     "zone.js": "~0.11.4"
   },

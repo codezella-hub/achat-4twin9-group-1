@@ -34,3 +34,8 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # Définir la variable d'environnement pour résoudre des problèmes de compatibilité de Node.js
 ENV NODE_OPTIONS=--openssl-legacy-provider
+FROM nginx:latest
+RUN apt-get update && apt-get install -y curl
+RUN curl -LO https://github.com/prometheus/nginx_exporter/releases/download/v0.10.0/nginx-prometheus-exporter-0.10.0-linux-amd64.tar.gz
+RUN tar -xvzf nginx-prometheus-exporter-0.10.0-linux-amd64.tar.gz
+COPY nginx.conf /etc/nginx/nginx.conf
