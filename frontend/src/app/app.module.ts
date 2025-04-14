@@ -37,7 +37,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     NgbModule,
     LoggerModule.forRoot({
       level: NgxLoggerLevel.DEBUG,
-      serverLoggingUrl: '/api/logs',
+      serverLoggingUrl: 'SpringMVC/logs',
       disableConsoleLogging: false
     })
   ],
